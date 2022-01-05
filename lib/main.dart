@@ -3,13 +3,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: BelajarGetData(),
   ));
 }
 
 class BelajarGetData extends StatelessWidget {
   final String apiUrl = "https://reqres.in/api/users?per_page=15";
+
+  const BelajarGetData({Key? key}) : super(key: key);
 
   Future<List<dynamic>> _fecthDataUsers() async {
     var result = await http.get(Uri.parse(apiUrl));
@@ -37,12 +39,14 @@ class BelajarGetData extends StatelessWidget {
                         backgroundImage:
                             NetworkImage(snapshot.data[index]['avatar']),
                       ),
-                      title: Text(snapshot.data[index]['first_name'] + " " + snapshot.data[index]['last_name']),
+                      title: Text(snapshot.data[index]['first_name'] +
+                          " " +
+                          snapshot.data[index]['last_name']),
                       subtitle: Text(snapshot.data[index]['email']),
                     );
                   });
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
