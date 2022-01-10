@@ -29,19 +29,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Okeh 0: Home',
+      'Home',
       style: optionStyle,
     ),
     Text(
-      'Okeh 1: Business',
+      'Search',
       style: optionStyle,
     ),
     Text(
-      'Okeh 2: School',
+      'School',
       style: optionStyle,
     ),
     Text(
-      'Okeh 3: Settings',
+      'Settings',
       style: optionStyle,
     ),
   ];
@@ -66,22 +66,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-            backgroundColor: Colors.green,
+            icon: Icon(Icons.search),
+            label: 'Search',
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'School',
-            backgroundColor: Colors.purple,
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
-            backgroundColor: Colors.pink,
+            backgroundColor: Colors.blue,
           ),
         ],
         currentIndex: _selectedIndex,
