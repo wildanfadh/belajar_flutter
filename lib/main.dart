@@ -56,7 +56,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mbeldos'),
+        title: const Text('Flutter Mbeldoss'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
