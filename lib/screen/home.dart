@@ -56,7 +56,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Mbeldoss'),
+        title: const Text('Flutter Header'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -75,7 +75,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
+            icon: Icon(Icons.shopping_cart),
             label: 'Cart',
             backgroundColor: Colors.blue,
           ),
