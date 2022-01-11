@@ -1,5 +1,6 @@
-import 'package:belajar_flutter/screen/home.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -8,7 +9,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const MyApp());
+        return MaterialPageRoute(builder: (_) => MyApp());
       // return MaterialPageRoute(builder: (_) => AboutPage(args));
       default:
         return _errorRoute();

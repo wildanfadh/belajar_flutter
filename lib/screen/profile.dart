@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-class SettingsPage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Settings page')));
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(child: Text('Profile page')),
+    );
   }
 }
