@@ -1,55 +1,118 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-final List<String> imgList = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-];
+// void main() => runApp(MyApp());
 
-void main() => runApp(CarouselDemo());
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Material App',
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Image carousel'),
+//         ),
+//         body: Carousel(),
+//       ),
+//     );
+//   }
+// }
 
-final themeMode = ValueNotifier(2);
+class Carousel extends StatefulWidget {
+  const Carousel({
+    Key? key,
+  }) : super(key: key);
 
-class CarouselDemo extends StatelessWidget {
+  @override
+  State<Carousel> createState() => _CarouselState();
+}
+
+class _CarouselState extends State<Carousel> {
+  late PageController _pageController;
+
+  List<String> images = [
+    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+    "https://wallpaperaccess.com/full/2637581.jpg",
+    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
+  ];
+
+  int activePage = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.8, initialPage: 1);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      builder: (context, value, g) {
-        return MaterialApp(
-          initialRoute: '/',
-          darkTheme: ThemeData.dark(),
-          themeMode: ThemeMode.values.toList()[value as int],
-          debugShowCheckedModeBanner: false,
-          routes: {
-            '/': (ctx) => ComplicatedImageDemo(),
-          },
-        );
-      },
-      valueListenable: themeMode,
+    return Column(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 200,
+          child: PageView.builder(
+              itemCount: images.length,
+              pageSnapping: true,
+              controller: _pageController,
+              onPageChanged: (page) {
+                setState(() {
+                  activePage = page;
+                });
+              },
+              itemBuilder: (context, pagePosition) {
+                bool active = pagePosition == activePage;
+                return slider(images, pagePosition, active);
+              }),
+        ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: indicators(images.length, activePage))
+      ],
     );
   }
 }
 
-class ComplicatedImageDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var imageSliders;
-    return Scaffold(
-      appBar: AppBar(title: Text('Complicated image slider demo')),
-      body: Container(
-        child: CarouselSlider(
-          options: CarouselOptions(
-            autoPlay: true,
-            aspectRatio: 2.0,
-            enlargeCenterPage: true,
-          ),
-          items: imageSliders,
-        ),
-      ),
+AnimatedContainer slider(images, pagePosition, active) {
+  double margin = active ? 10 : 20;
+
+  return AnimatedContainer(
+    duration: Duration(milliseconds: 500),
+    curve: Curves.easeInOutCubic,
+    margin: EdgeInsets.all(margin),
+    decoration: BoxDecoration(
+        image: DecorationImage(image: NetworkImage(images[pagePosition]))),
+  );
+}
+
+imageAnimation(PageController animation, images, pagePosition) {
+  return AnimatedBuilder(
+    animation: animation,
+    builder: (context, widget) {
+      print(pagePosition);
+
+      return SizedBox(
+        width: 200,
+        height: 200,
+        child: widget,
+      );
+    },
+    child: Container(
+      margin: EdgeInsets.all(10),
+      child: Image.network(images[pagePosition]),
+    ),
+  );
+}
+
+List<Widget> indicators(imagesLength, currentIndex) {
+  return List<Widget>.generate(imagesLength, (index) {
+    return Container(
+      margin: EdgeInsets.all(3),
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+          color: currentIndex == index ? Colors.black : Colors.black26,
+          shape: BoxShape.circle),
     );
-  }
+  });
 }
