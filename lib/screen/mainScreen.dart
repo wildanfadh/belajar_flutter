@@ -35,6 +35,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ListPage(),
     SettingPage(),
   ];
+  static const List<Widget> _barOptions = <Widget>[
+    Text('Home'),
+    Text('List'),
+    Text('Setting'),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -45,9 +50,43 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('AppBar'),
-      // ),
+      appBar: AppBar(
+        title: _barOptions.elementAt(_selectedIndex),
+        backgroundColor: Colors.green,
+        toolbarHeight: 50,
+        actions: [Icon(Icons.notifications_none)],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Messages'),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
