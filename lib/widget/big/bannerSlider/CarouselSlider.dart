@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 final List<String> imgList = [
@@ -59,11 +60,13 @@ class ComplicatedImageDemo extends StatelessWidget {
         // appBar: AppBar(title: Text('Complicated image slider demo')),
         // body:
         Container(
+      padding: EdgeInsets.zero,
       child: CarouselSlider(
         options: CarouselOptions(
-          height: 400,
+          height: 170,
           autoPlay: true,
-          aspectRatio: 1.5,
+          aspectRatio: 2.0,
+          // disableCenter: true,
           enlargeCenterPage: false,
           // aspectRatio: 16 / 9,
           viewportFraction: 1,

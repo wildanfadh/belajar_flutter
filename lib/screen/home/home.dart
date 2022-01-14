@@ -14,21 +14,23 @@ class HomePage extends StatelessWidget {
             //   child: ComplicatedImageDemo(),
             // ),
             GridView.count(
-      primary: false,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      shrinkWrap: true,
+      // primary: false,
+      padding: const EdgeInsets.all(20),
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
+      childAspectRatio: 2.0,
       crossAxisCount: 1,
       children: <Widget>[
         Container(
           child: ComplicatedImageDemo(),
-          // color: Colors.teal[100],
         ),
         Container(
           padding: const EdgeInsets.all(8),
           child: const Text('Okeh Mbeldos'),
           color: Colors.teal[100],
         ),
+        Container()
       ],
     ));
   }

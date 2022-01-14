@@ -53,7 +53,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: _barOptions.elementAt(_selectedIndex),
         backgroundColor: Colors.green,
-        toolbarHeight: 50,
+        toolbarHeight: 70,
         actions: [Icon(Icons.notifications_none)],
       ),
       drawer: Drawer(
